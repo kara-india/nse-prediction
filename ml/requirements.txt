@@ -1,0 +1,37 @@
+# Core ML
+numpy>=1.26
+pandas>=2.0
+scikit-learn>=1.4
+xgboost>=2.0
+lightgbm>=4.0
+catboost>=1.2
+
+# Probabilistic forecasting
+ngboost>=0.3.12
+mapie>=0.8
+
+# Time series
+statsmodels>=0.14
+
+# NLP / Sentiment
+transformers>=4.40
+torch>=2.0
+# FinBERT: ProsusAI/finbert via HuggingFace
+
+# Data
+yfinance>=0.2.40
+requests>=2.31
+pandas-market-calendars>=4.3  # for NSE/BSE trading calendar
+beautifulsoup4>=4.12
+python-dotenv>=1.0
+pytz>=2024.1
+
+# Validation / metrics
+shap>=0.45
+
+# Storage
+supabase>=2.0
+
+# Utilities
+tqdm>=4.66
+pydantic>=2.0

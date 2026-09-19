@@ -1,0 +1,80 @@
+{
+  "app": {
+    "title": "NSE Stock Intelligence",
+    "subtitle": "Personal Research Dashboard"
+  },
+  "market": {
+    "status": {
+      "OPEN": "Market Open",
+      "CLOSED": "Market Closed",
+      "PRE_OPEN": "Pre-Open",
+      "POST_CLOSE": "Post Close"
+    }
+  },
+  "signal": {
+    "BUY": "BUY",
+    "HOLD": "HOLD",
+    "SELL": "SELL",
+    "confidence": "Prediction Confidence",
+    "reason": {
+      "momentum_positive": "Price momentum is positive over recent sessions",
+      "momentum_negative": "Price momentum has weakened over recent sessions",
+      "valuation_attractive": "Valuation appears relatively attractive vs historical range",
+      "valuation_stretched": "Valuation appears stretched vs historical range",
+      "positive_news_overnight": "Positive company/sector news appeared after yesterday's close",
+      "negative_news_overnight": "Negative news appeared after yesterday's close",
+      "sector_strength": "Sector peers are showing relative strength",
+      "sector_weakness": "Sector peers are showing relative weakness",
+      "global_tailwind": "Global markets provide a positive backdrop",
+      "global_headwind": "Global market conditions are unfavorable",
+      "high_confidence": "Model confidence is high based on historical accuracy in similar conditions",
+      "low_confidence": "Model confidence is moderate; treat signal with caution",
+      "volume_accumulation": "Trading volume suggests accumulation",
+      "volume_distribution": "Trading volume suggests distribution",
+      "above_support": "Stock is trading above key support level",
+      "below_resistance": "Stock is approaching a resistance zone"
+    }
+  },
+  "horizon": {
+    "1D": "1 Day",
+    "1W": "1 Week",
+    "1M": "1 Month",
+    "3M": "3 Months"
+  },
+  "prediction": {
+    "expectedRange": "Expected Range",
+    "probabilityOfGain": "Probability of Gain",
+    "centralEstimate": "Central Estimate",
+    "confidence": "Confidence"
+  },
+  "risk": {
+    "entryRange": "Entry Range",
+    "stopLoss": "Stop Loss",
+    "upsideTarget": "Upside Target",
+    "riskReward": "Risk / Reward"
+  },
+  "yesterday": {
+    "title": "What Happened Yesterday",
+    "outperformed": "Outperformed NIFTY by {{pct}}",
+    "underperformed": "Underperformed NIFTY by {{pct}}",
+    "volumeHigh": "Volume was {{ratio}}× its 20-day average",
+    "newsDetected": "{{count}} relevant news item(s) detected after market close",
+    "causalDisclaimer": "(potential contributor — causality not proven)"
+  },
+  "news": {
+    "overnightTitle": "Overnight News",
+    "recentTitle": "Recent News",
+    "noNews": "No relevant news found",
+    "relevance": "Relevance",
+    "sentiment": "Sentiment"
+  },
+  "global": {
+    "title": "Global Factors",
+    "subtitle": "Why the world may matter today"
+  },
+  "errors": {
+    "dataUnavailable": "Data currently unavailable",
+    "providerError": "Data provider error — using cached data",
+    "noData": "No data found for this symbol"
+  }
+}

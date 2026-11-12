@@ -14,6 +14,8 @@
 | **09** | [09-vercel-architecture.md](./09-vercel-architecture.md) | Vercel Limits, Decoupled Topology, Scheduled Jobs, Zero-Cost Deployment Stack | ✅ Complete |
 | **10** | [10-database-design.md](./10-database-design.md) | Complete PostgreSQL/Supabase DDL Schema with Point-in-Time and Auditing Support | ✅ Complete |
 | **11** | [11-mvp-implementation-plan.md](./11-mvp-implementation-plan.md) | Phased Implementation Roadmap, Phase 2 Step-by-Step Execution Sequence | ✅ Complete |
+| **12** | [12-market-data-and-strategy-research.md](./12-market-data-and-strategy-research.md) | Official NSE MCP, third-party MCP assessment, data rights, earnings-event research, factor hypotheses and research gaps | ✅ Research draft for review |
+| **13** | [13-development-roadmap.md](./13-development-roadmap.md) | Reviewable phased plan from licensing and data foundations through event research, validation, shadow operation and dashboard | ✅ Draft for review |
 
 ---
 *Executive Summary available in [RESEARCH_SUMMARY.md](../../RESEARCH_SUMMARY.md).*

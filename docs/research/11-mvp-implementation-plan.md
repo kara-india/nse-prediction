@@ -1,6 +1,8 @@
 ﻿# 11 — Phase 2 MVP Implementation Plan
 *Personal Indian Stock Intelligence Dashboard · Step-by-Step Engineering Blueprint*
 
+> **Roadmap status:** This was the Phase 1 scaffold plan. Use [13-development-roadmap.md](./13-development-roadmap.md) as the current implementation plan; it adds data-rights gates and the earnings-event research track. Do not start the old BhavCopy/yfinance ingestion steps until Phase 0 confirms permitted use and source terms.
+
 ---
 
 ## 1. Phased Roadmap Overview

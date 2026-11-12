@@ -16,8 +16,8 @@ The primary mandate of Phase 1 is **scientific defensibility, total prevention o
 
 | Data Domain | Primary Source | Secondary / Fallback | Update Frequency | Cost |
 |---|---|---|---|---|
-| **Historical Price (OHLCV)** | **NSE Official BhavCopy Archives** (authoritative daily CSVs from 1994–present) | `yfinance` (`.NS` / `.BO` tickers with backward adjustment verification) | Daily post-market (16:30 IST) | **Free** |
-| **Intraday & Live Quotes** | **Zerodha Kite Connect WebSocket** (if user holds account) OR **Upstox WebSocket API** | `yfinance` 1-minute polled intervals (cached with 60s TTL) | Real-time / 1-min polling during 09:15–15:30 IST | **Free** (Upstox free with demat; Kite Rs 500/mo optional) |
+| **Historical Price (OHLCV)** | NSE official historical/EOD products or another licensed provider; confirm permitted storage, backtesting and model-training use | `yfinance` / vendor fallback only after source-quality and terms review | Daily post-market | **TBD — rights/pricing gate required** |
+| **Intraday & Live Quotes** | Broker API or licensed vendor, after permission and cost review | No unofficial polling fallback for decision signals | Feed-specific; intraday is deferred | **TBD** |
 | **Security Master & ISINs** | **NSE Equity Master CSV** + **BSE Security Master CSV** | `nselib` Python package | Daily morning refresh | **Free** |
 | **Corporate Actions (Splits, Dividends)** | **NSE Corporate Actions Archive CSV** | BSE Corporate Actions Portal | Daily | **Free** |
 | **Fundamental Data (Point-in-Time)** | **BSE XBRL Corporate Filing Portal** (ingested at announcement date) | Quarterly financial extracts with strict 45-day reporting lag buffer | Quarterly | **Free** |
@@ -25,12 +25,14 @@ The primary mandate of Phase 1 is **scientific defensibility, total prevention o
 | **Historical News Corpus** | **GDELT Project 2.0** (filtered on Indian financial entities & themes) | Archival RSS stream (captured continuously from Day 1) | Historical batch / Daily | **Free** |
 | **Global & Macro Variables** | **Yahoo Finance** (S&P 500, Nasdaq, DXY, Brent Crude, US 10Y, India VIX, NIFTY Bank) | Federal Reserve FRED API + RBI Bulletins | Daily pre-market (08:30 IST) | **Free** |
 
+**Data-use caveat (Nov 2026):** Cost/access labels above are preliminary research, not confirmed rights for this application. Publicly reachable or free-tier data does not by itself permit persistent storage, automated trade-decision calculations, model training or redistribution. NSE’s MCP terms expressly do not grant model-training rights; select each source only after checking the current provider agreement for the intended use.
+
 ---
 
 ## 2. Alternatives and Fallbacks
 
 * **If Screener.in is used**: Screener.in does NOT offer an official API and is **NOT point-in-time safe** for historical backtesting (ratios use current prices against historical restated EPS). Screener.in may only be used for **displaying current fundamental metrics in the UI**, never for training ML feature vectors.
-* **If yfinance fails or blocks requests**: Fall back directly to NSE BhavCopy archives for historical bars, and Twelve Data (800 free req/day) for recent daily quotes.
+* **If a provider fails**: Fall back only to a source whose terms permit the intended use. NSE’s newly available MCP provides about five years of EOD data and delayed cash-market snapshots for informational/learning use; its current terms do not grant model-training rights. Do not use that MCP as a training/inference feed.
 * **If live WebSocket feeds are unavailable**: Fall back to lightweight polled quotes via Next.js server-side caching with a 60-second stale-while-revalidate policy.
 
 ---
@@ -175,19 +177,19 @@ Complete schema designed across 8 normalized tables:
 
 ## 14. Data / Licensing / ToS Risks
 
-* **yfinance / Unofficial Scrapers**: Potential IP throttling or HTML structure changes. *Mitigation: Use primary official NSE BhavCopy CSV archives for training data; use yfinance as secondary cache.*
+* **Market-data rights and unofficial sources**: Publicly accessible downloads, free APIs and an MCP connector do not automatically grant rights for automated decision calculations or model training. *Mitigation: Confirm the exact source agreement and intended use in writing before building the training feed; preserve source timestamps and provenance.*
 * **Screener.in Scraped Data**: ToS prohibits commercial bulk scraping. *Mitigation: Strictly for personal research; use open BSE XBRL filings for core fundamental snapshots.*
 
 ---
 
-## 15. What Can Be Built With Zero-Cost Data (Phase 1 & 2)
+## 15. What Can Be Built Before Market-Data Rights Are Resolved
 
-* Complete 10+ year historical daily price dataset from official NSE BhavCopy archives.
-* Full point-in-time technical and macro feature pipelines.
-* Multi-horizon LightGBM probabilistic forecasting models.
-* Conformal prediction intervals and calibrated probability scores.
-* Live RSS news ingestion and FinBERT sentiment scoring.
-* Complete Next.js dashboard hosted on Vercel Hobby tier connected to Supabase free tier.
+* UI, schemas, offline fixtures and provider interfaces.
+* A manual research workflow using sources whose terms permit that use.
+* Point-in-time pipeline design and tests against synthetic/offline fixtures.
+* Licensed-data cost discovery and a small source-validation pilot.
+
+Historical model training, automated signal calculations and live market-data use remain gated on documented source rights and pricing. NSE MCP terms explicitly prohibit training/fine-tuning from MCP data; historical depth and split/bonus adjustments also differ from the original free-data assumptions. See [docs/research/12-market-data-and-strategy-research.md](docs/research/12-market-data-and-strategy-research.md) and [docs/research/13-development-roadmap.md](docs/research/13-development-roadmap.md).
 
 ---
 

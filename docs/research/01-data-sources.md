@@ -12,7 +12,7 @@
 | **Officially supported APIs** | Kite Connect, Upstox, Angel One SmartAPI, NSE Data & Analytics (paid), BSE official downloads |
 | **Technically accessible (unofficial)** | yfinance, nsepython, nselib, jugaad-data, OpenBB, EODHD, Twelve Data, FMP |
 | **Deprecated / broken** | NSEpy (broken since Apr 2023), Quandl (no India coverage), Alpha Vantage (unreliable for India) |
-| **Free (with limits)** | yfinance, NSE/BSE CSV downloads, nselib, nsepython, Alpha Vantage (25 rpm), FMP (250 req/day) |
+| **Publicly accessible / free tiers (use rights vary)** | yfinance, NSE/BSE downloads, nselib, nsepython, Alpha Vantage, FMP. Public access or a free tier does not establish rights for model training, automated trading calculations, retention or redistribution. |
 | **Paid** | Kite Connect (Rs 500/mo), Upstox Pro, Angel One SmartAPI, EODHD (-80/mo), Twelve Data (+/mo), TrueData |
 
 ---
@@ -21,19 +21,19 @@
 
 | Source | NSE | BSE | Daily History Depth | Intraday | Fundamentals | News | Free Tier | Stability | Legal/ToS Concern | Recommendation |
 |---|---|---|---|---|---|---|---|---|---|---|
-| yfinance | .NS | .BO | ~20 yrs | 1m-1d (60d window) | Partial | No | Yes | Medium (scrape) | Unofficial scrape | Good for ML training; fragile for prod |
+| yfinance | .NS | .BO | ~20 yrs | 1m-1d (60d window) | Partial | No | Yes | Medium (scrape) | Unofficial access; verify current terms | Research candidate only after terms/quality review; fragile for production |
 | NSEpy | No | No | N/A | N/A | No | No | N/A | Broken Apr 2023 | N/A | DEPRECATED - do not use |
-| NSE Official BhavCopy | Yes (authoritative) | No | Full exchange history | Paid feed | No | No | CSV bulk only | High | Official CSV OK | Use BhavCopy for training |
+| NSE Official BhavCopy | Yes (authoritative) | No | Exchange archive depth varies by product | Paid feed | No | No | Public downloads / subscription products | High | Confirm terms for storage, automated calculations and model training | Candidate source only after written use-rights review |
 | BSE Official | No | Yes (authoritative) | Full history | No free API | No | No | CSV downloads | High | Official | Use for BSE history & corp actions |
 | Alpha Vantage | Unreliable | Unreliable | ~20 yrs | Yes | US-centric | Yes | 25 req/day | Low for India | API ToS OK | NOT recommended for India |
-| Twelve Data | Yes | Yes | 20+ yrs | 1m-4h | No | No | 800 req/day | High | Commercial OK | Good OHLCV backup |
+| Twelve Data | Yes | Yes | Provider-dependent | 1m-4h | No | No | Current plan-dependent | Provider-dependent | Vendor terms apply | Candidate backup; verify Indian coverage and model/derived-use rights |
 | OpenBB | Via providers | Via providers | Provider-dependent | Yes | Aggregated | Yes | Open-source | Provider-dependent | Provider ToS apply | Research UI; unstable as pipeline |
 | Jugaad Trader | Yes | Yes | ~10 yrs (BhavCopy) | Yes | No | No | Yes | Community | Unofficial scrape | Bulk BhavCopy ingestion |
 | Kite Connect | Yes | No | 2000 candles/req | 1m-day | No | No | Rs 500/mo | High | Official broker API | BEST for live dashboard + intraday |
 | Angel SmartAPI | Yes | Yes | ~1 yr intraday | Yes | No | No | Free w/ demat | Medium-High | Official broker | Free alternative to Kite |
 | Upstox API | Yes | Yes | ~2 yrs intraday | Yes | No | No | Free w/ demat | Medium-High | Official broker | Free alternative; WebSocket |
-| EODHD | Yes | Yes | 20+ yrs | 1m historical | Yes (financials) | Yes | 20 req/day free | High | Commercial OK | BEST paid: adjusted OHLCV + fundamentals |
-| FMP | Partial | Partial | Varies | No | Strong | No | 250 req/day | Medium India | Commercial OK | Verify per-ticker coverage first |
+| EODHD | Yes | Yes | Provider-dependent | 1m historical | Yes (financials) | Yes | Trial/free tier varies | Provider-dependent | Vendor terms apply | Paid candidate; verify Indian coverage, PIT policy and model/derived-use rights |
+| FMP | Partial | Partial | Varies | No | Strong | No | Current plan-dependent | Medium India | Vendor terms apply | Verify per-ticker coverage, PIT history and model/derived-use rights |
 | Quandl/Nasdaq Data Link | No | No | N/A | N/A | No | No | N/A | N/A | N/A | No India coverage |
 
 ---
@@ -42,11 +42,15 @@
 
 | Use Case | Recommended Sources |
 |---|---|
-| ML historical training (price) | NSE BhavCopy CSVs + yfinance (.NS/.BO) + EODHD |
+| ML historical training (price) | Licensed historical EOD feed or source with written rights for backtesting/model training; yfinance/provider alternatives also require terms and quality review |
 | ML historical training (fundamentals) | BSE XBRL quarterly filings (point-in-time) or EODHD |
 | Live dashboard (real-time) | Kite Connect WebSocket or Upstox WebSocket |
 | Intraday ML features | Kite Connect (1m candles), Upstox, TrueData |
-| Corporate actions | NSE/BSE official CSVs -> EODHD for adjusted series |
+| Corporate actions | NSE/BSE official files or licensed provider after use-rights confirmation; keep raw records and derive versioned adjustments |
+
+### Official NSE MCP (research update, Nov 2026)
+
+NSE now publishes two official MCP endpoints: `nse-bhavcopy` for EOD/history and `cm-market` for near-real-time cash-market snapshots. NSE’s page describes roughly five years of EOD data, 1–3 minute delayed quotes and no tick/order-book data. The MCP terms explicitly limit use to informational/learning purposes and do not grant rights to commercially exploit the data or train/fine-tune models or algorithms. Do not use the MCP as the automated model-training or signal feed under the current terms. See [12-market-data-and-strategy-research.md](./12-market-data-and-strategy-research.md) for endpoint capabilities and data-rights findings.
 
 ---
 
@@ -135,13 +139,13 @@ Warning: Forward-adjusted prices shift with every new corporate action. Store a 
 ## Quick-Reference Recommended Stack
 
 `
-ML Training (price)        -> NSE BhavCopy CSVs + yfinance fallback
+ML Training (price)        -> A licensed/approved historical source; verify model-training rights before use
 ML Training (fundamentals) -> BSE XBRL quarterly filings (point-in-time snapshot)
                               or EODHD fundamentals (verify restatement)
 Live Dashboard             -> Kite Connect WebSocket or Upstox WebSocket
-Corporate Actions          -> NSE/BSE official CSVs -> EODHD for pre-adjusted
+Corporate Actions          -> Permitted NSE/BSE files or licensed source; derive versioned adjustments
 Ticker Universe            -> NSE Equity Master CSV (daily cron)
-Anti-survivorship          -> NSE BhavCopy daily archive replay
+Anti-survivorship          -> Historical security-master/archive source with permitted use; include delisted names
 `
 
 Sources: nseindia.com | bseindia.com | kite.trade | eodhd.com | screener.in | pypi.org/project/nselib | pypi.org/project/jugaad-data | Sep 2026

@@ -64,7 +64,7 @@ Hosting an ML-driven stock intelligence dashboard on Vercel requires strict sepa
 │  3. Modal.com / Render / Cloud Run (Free credit tier for Python microservices)            │
 │                                                                                           │
 │  Scheduled Daily Tasks (16:30 IST / Post-Close):                                          │
-│  1. Ingest NSE BhavCopy + Corporate Actions                                               │
+│  1. Ingest approved/ licensed EOD data + corporate actions                                │
 │  2. Fetch Overnight & Post-Close RSS / Exchange Announcements                             │
 │  3. Run Point-in-Time Feature Engineering Pipeline                                        │
 │  4. Execute Pre-trained LightGBM Models (1D, 1W, 1M, 3M)                                  │
@@ -85,7 +85,7 @@ Indian markets operate on **Asia/Kolkata** time:
 
 ### Daily Timeline:
 1. **16:45 IST**: GitHub Action or Local Cron triggers daily batch script (`scripts/ingest_daily.py`).
-2. **Step 1 - Data Sync**: Fetch latest BhavCopy, update `ohlcv_daily`.
+2. **Step 1 - Data Sync**: Fetch from the approved provider, update `ohlcv_daily`; do not assume public MCP or file access permits model use.
 3. **Step 2 - News Aggregation**: Poll exchange announcements (BSE/NSE) and financial RSS feeds published between previous close (15:30 IST $T-1$) and today's close (15:30 IST $T$).
 4. **Step 3 - Feature Build**: Compute rolling indicators, lagged macro variables, and NLP sentiment scores strictly up to date $T$.
 5. **Step 4 - Inference**: Generate multi-horizon predictions ($T+1, T+5, T+21, T+63$) and risk levels.
@@ -102,9 +102,11 @@ Indian markets operate on **Asia/Kolkata** time:
 | **Frontend & API Gateway** | Vercel | Hobby Plan | **$0.00** |
 | **Database & Cache** | Supabase | Free Tier (500MB DB, 2 projects) | **$0.00** |
 | **Daily Batch / ML Inference** | Local Cron / GitHub Actions | Free (2,000 free runner minutes) | **$0.00** |
-| **Market Data (Historical)** | NSE Official Archives (BhavCopy) | Public Open Data | **$0.00** |
-| **Live Intraday Quotes** | yfinance / Unofficial endpoints | Open-source | **$0.00** |
-| **Total Phase 1 Cost** | | | **$0.00 / month** |
+| **Market Data (Historical)** | Exchange/provider source with rights for storage, backtesting and model training | **TBD — confirm terms and pricing before implementation** | **TBD** |
+| **Live Intraday Quotes** | Licensed vendor or broker source, if intraday scope is approved | Terms and costs TBD | **TBD** |
+| **Total Phase 1 Cost** | Market-data rights unresolved | | **TBD / month** |
+
+The official NSE MCP is available for informational/learning use, but NSE’s published MCP terms do not grant rights to train models or commercially exploit the data. Do not use it as the automated inference/training feed unless NSE confirms the planned use in writing. The previous zero-cost market-data estimate is not validated for this project’s automated strategy research; see [12-market-data-and-strategy-research.md](./12-market-data-and-strategy-research.md).
 
 ---
 *Sources: Vercel Documentation (vercel.com/docs), Supabase Pricing (supabase.com/pricing), GitHub Actions limits.*

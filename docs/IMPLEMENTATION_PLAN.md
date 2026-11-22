@@ -20,10 +20,10 @@ Build an evidence-led NSE equity intelligence platform. The first product milest
 | Phase | Scope | Exit gate |
 |---|---|---|
 | 0 | Repository/research audit; competitor teardown; data entitlements; regulatory review; reconcile contradictions | Approved architecture, data-source status matrix, competitor matrix, documented open issues |
-| 1 | White/ivory and muted-gold Next.js dashboard; upcoming/weekly/past results; filters; stock detail; research-preview panel; optional Gemini explainer | Codex runs localhost; verifies flows using fixtures; writes `docs/ui-localhost-verification.md`; production deployment remains separately gated |
+| 1 | White/ivory and muted-gold Next.js dashboard; upcoming/weekly/past results; filters; stock detail; market-context panel (clearly labelled descriptive until validated); research-preview panel; optional Gemini explainer | Codex runs localhost; verifies flows using fixtures; writes `docs/ui-localhost-verification.md`; production deployment remains separately gated |
 | 2 | Point-in-time earnings events and filing revisions; provenance and reconciliation | Historical event records have identifiers, actual filing timestamps, source provenance and revision lineage |
 | 3 | Pre- and post-announcement event studies, including PEAD and low-activity hypotheses | Prespecified experiments, placebo tests, cost model, multiple-testing controls and falsifiable conclusions |
-| 4 | Baselines, supervised models, probability calibration, quantile/uncertainty estimates and chronological validation | OOS and untouched-holdout evidence vs baselines; no leakage; net-of-cost results |
+| 4 | Baselines, supervised models, probability calibration, quantile/uncertainty estimates, separate opening-gap/intraday/close-to-close market-regime forecasts and chronological validation | OOS and untouched-holdout evidence vs baselines; no leakage; net-of-cost results |
 | 5 | Independent momentum, breakout, pullback, reversal, sector and regime strategy research; later HTCN/RL feasibility | Strategy-specific acceptance or documented rejection |
 | 6 | Immutable recommendation service, risk gates, grounded Gemini explanations | Every recommendation links to a stored model result and valid data/model versions; abstention works |
 | 7 | Paper trading, realistic fills, partial fills, costs, limits, monitoring and rollback | Stable paper execution and complete audit trail |
@@ -38,6 +38,7 @@ Build an evidence-led NSE equity intelligence platform. The first product milest
 - Use trading-session calendars and label-horizon-derived purge/embargo; never hard-code one split gap for all horizons.
 - Compare to simple baselines; prevent final-holdout reuse and parameter/data snooping.
 - Do not use RL or HTCN until its research gate is passed. Do not equate daily outcome resolution with safe source-code mutation.
+- Market context is not a blanket bullish/bearish points adjustment. Keep opening-gap, intraday and session-close forecasts separate; condition stock forecasts on validated market/sector features, beta and relative strength.
 - AI is an explainer only; it cannot invent financial facts or override the decision engine.
 - Public-facing stock-specific recommendations need an Indian regulatory classification/legal review, including Research Analyst requirements. Broker order automation needs a separate current SEBI/NSE/broker review.
 - No autonomous live orders, no code self-modification in production, and no strategy promotion without review.
@@ -57,6 +58,10 @@ After every phase, update the relevant research docs, `RESEARCH_SUMMARY.md`, `AG
 ## Deployment gate
 
 Vercel configuration and preview preparation may be done when appropriate. Do not deploy to production until Codex has run the UI locally, tested the calendar, filters, stock detail, research-preview and AI explainer (if included) using fixtures, fixed the issues, and written `docs/ui-localhost-verification.md`. Production deployment needs explicit approval after that report.
+
+## Market-regime research addition
+
+See [global market regime feature specification](docs/research/14-global-market-regime-features.md) and the [23 November 2026 pre-market case study](docs/market-briefs/2026-11-23-pre-market.md). Add timestamped global and domestic market cues to the feature roadmap, but do not hard-code hand-weighted bullish points or treat a positive GIFT Nifty gap as a positive full-session forecast. Validate incremental value via walk-forward ablation.
 
 ## Immediate next task
 

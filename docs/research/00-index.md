@@ -16,6 +16,10 @@
 | **11** | [11-mvp-implementation-plan.md](./11-mvp-implementation-plan.md) | Original Phase 2 MVP plan (superseded by document 13 pending data-rights gate) | Archived plan |
 | **12** | [12-market-data-and-strategy-research.md](./12-market-data-and-strategy-research.md) | Official NSE MCP, third-party MCP assessment, data rights, earnings-event research, factor hypotheses and research gaps | ✅ Research draft for review |
 | **13** | [13-development-roadmap.md](./13-development-roadmap.md) | Reviewable phased plan from licensing and data foundations through event research, validation, shadow operation and dashboard | ✅ Draft for review |
+| **14** | [14-global-market-regime-features.md](./14-global-market-regime-features.md) | US/Asia overnight cues, GIFT Nifty basis, India VIX/breadth, market-regime forecasts, freshness, validation and stock-level conditioning | ✅ Research specification |
+
+
+**Dated market case study:** [2026-11-23-pre-market.md](../market-briefs/2026-11-23-pre-market.md) — timestamped pre-market context; not a model signal.
 
 ---
 *Executive Summary available in [RESEARCH_SUMMARY.md](../../RESEARCH_SUMMARY.md).*

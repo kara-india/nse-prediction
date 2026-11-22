@@ -12,6 +12,8 @@ Early research and architecture scaffold. The immediate target is a fixture-back
 - [Next-session checkpoint](docs/NEXT_SESSION.md)
 - [Research document index](docs/research/00-index.md)
 - [HTCN + RL and daily learning research addendum](docs/research/addendum-htcn-rl-and-daily-learning.md)
+- [Global market regime feature specification](docs/research/14-global-market-regime-features.md)
+- [23 Nov 2026 pre-market case study](docs/market-briefs/2026-11-23-pre-market.md)
 - [Research summary](RESEARCH_SUMMARY.md)
 
 ## Development

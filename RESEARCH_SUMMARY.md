@@ -201,3 +201,16 @@ Historical model training, automated signal calculations and live market-data us
 
 ---
 *All detailed research documents are cataloged in [docs/research/00-index.md](docs/research/00-index.md).*
+
+
+---
+
+## 17. Global Market Regime & Overnight Cue Layer (Research Addition — 23 Nov 2026)
+
+Market direction must be a first-class context layer, but an opening-gap forecast must remain separate from an intraday or close-to-close forecast. The engine should capture timestamped US cash/futures indices, VIX, US yields, DXY, Asian indices, commodities, USD/INR, GIFT Nifty contract/basis, India VIX, Nifty/sector breadth, institutional flows, pre-open indications and then intraday VWAP/opening-range/volume confirmation when those observations actually become available.
+
+Do not assign a fixed number of bullish points to every stock when global cues are positive. Model market return and regime separately, then evaluate stock-specific market beta, sector exposure and residual/relative strength. Market regime should be a conditional model feature, validation stratifier and risk/exposure input. Every observation requires a source timestamp, retrieval timestamp, session status, freshness and entitlement status. Stale/conflicting data must be flagged, not silently replaced.
+
+Research specification: [docs/research/14-global-market-regime-features.md](docs/research/14-global-market-regime-features.md). Dated case study: [docs/market-briefs/2026-11-23-pre-market.md](docs/market-briefs/2026-11-23-pre-market.md).
+
+The 23 Nov 2026 pre-market case study concluded a **mildly positive opening bias but unresolved full-session direction**, based on a timestamped NSE IX GIFT Nifty snapshot and a US futures rebound against a still-fragile global risk backdrop. This historical snapshot is not a model prediction or trading recommendation.

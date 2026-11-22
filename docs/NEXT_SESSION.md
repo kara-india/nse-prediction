@@ -1,6 +1,6 @@
 # Next Session Checkpoint
 
-Date: 2026-11-13
+Date: 2026-11-23
 Repository: https://github.com/kara-india/nse-prediction
 Current default branch: main
 
@@ -9,13 +9,17 @@ Current default branch: main
 - Existing repository is an early scaffold with a substantial research documentation set.
 - `docs/IMPLEMENTATION_PLAN.md` is the canonical implementation roadmap.
 - `docs/research/addendum-htcn-rl-and-daily-learning.md` adds the HTCN/RL feasibility workstream, candidate repo audit, daily Day B → Day B+1 evaluation lifecycle, immutable memory/ledgers and approval-controlled self-improvement governance.
+- `docs/research/14-global-market-regime-features.md` defines timestamped US/Asia/GIFT Nifty/India market-context inputs, separate opening/intraday/close forecasts, freshness checks and walk-forward validation.
+- `docs/market-briefs/2026-11-23-pre-market.md` records the 05:03 IST case study. It is research context, not a calibrated model forecast.
 - No model training, trading automation, broker integration or production deployment has been authorised by this checkpoint.
 
 ## First task
 
 Begin Phase 0:
 1. Read `docs/IMPLEMENTATION_PLAN.md`, `RESEARCH_SUMMARY.md`, `AGENTS.md` and every file in `docs/research/`.
-2. Read `docs/research/addendum-htcn-rl-and-daily-learning.md`.
+2. Read `docs/research/addendum-htcn-rl-and-daily-learning.md` and `docs/research/14-global-market-regime-features.md`.
+3. Review the 23 Nov 2026 market brief as a case study in timestamped multi-source cues; do not hard-code its bias or reuse it as a training observation.
+4. Audit which proposed market-context fields already exist in types/provider contracts and design the entitlement/freshness-aware integration. The market-cue feature groups require Phase 0 source-rights review before data ingestion or model use.
 3. Audit the current implementation and reconcile contradictions (notably stop-loss direction, purge/embargo and provider entitlements).
 4. Run the independent research workstreams defined in the plan.
 5. Create Phase 0 deliverables and `docs/phase-0-status.md`.

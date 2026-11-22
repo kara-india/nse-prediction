@@ -237,6 +237,7 @@ export interface Prediction {
   modelId: string;
   featuresHash: string; // hash of input features for reproducibility
   generatedAt: string; // ISO 8601
+  marketContextSnapshotId?: string; // Links to the point-in-time global/domestic context used at prediction time
 }
 
 export interface PredictionOutcome {
@@ -279,6 +280,7 @@ export interface Signal {
   // Metadata
   modelVersion: string;
   generatedAt: string;
+  marketContextSnapshotId?: string; // Links to the point-in-time context used for this signal
 }
 
 // --- Model Evaluation ---
@@ -321,3 +323,7 @@ export interface WatchlistItem {
     returnThreshold?: number;
   };
 }
+
+
+// Point-in-time global and domestic market context contracts.
+export * from './market-context';
